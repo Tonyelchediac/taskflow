@@ -42,7 +42,7 @@ function ProjectsPage() {
     const userId = decoded.userID;
 
     // Get user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -50,7 +50,7 @@ function ProjectsPage() {
       .catch(err => console.log(err));
 
     // Fetch all users from usersdetails table for task assignment
-    authFetch('https://taskflow-k90l.onrender.com/usersdetails')
+    authFetch('https://taskflow-9hgr.onrender.com/usersdetails')
       .then(res => res.json())
       .then(data => {
         setUsers(data);
@@ -62,7 +62,7 @@ function ProjectsPage() {
   }, [navigate]);
 
   const fetchProjects = () => {
-    authFetch('https://taskflow-k90l.onrender.com/projects')
+    authFetch('https://taskflow-9hgr.onrender.com/projects')
       .then(res => res.json())
       .then(data => {
         setProjects(data);
@@ -81,7 +81,7 @@ function ProjectsPage() {
   };
 
   const fetchProjectDetails = (projectId) => {
-    authFetch(`https://taskflow-k90l.onrender.com/projects/${projectId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/projects/${projectId}`)
       .then(res => res.json())
       .then(data => {
         setSelectedProjectData(data);
@@ -90,7 +90,7 @@ function ProjectsPage() {
   };
 
   const fetchProjectHealth = (projectId) => {
-    authFetch(`https://taskflow-k90l.onrender.com/projects/${projectId}/health`)
+    authFetch(`https://taskflow-9hgr.onrender.com/projects/${projectId}/health`)
       .then(res => res.json())
       .then(data => {
         setProjectHealth(data);
@@ -167,7 +167,7 @@ function ProjectsPage() {
     };
 
     try {
-      const url = editingProject ? `https://taskflow-k90l.onrender.com/projects/${editingProject.id}` : 'https://taskflow-k90l.onrender.com/projects';
+      const url = editingProject ? `https://taskflow-9hgr.onrender.com/projects/${editingProject.id}` : 'https://taskflow-9hgr.onrender.com/projects';
       const method = editingProject ? 'PUT' : 'POST';
 
       const response = await authFetch(url, {
@@ -229,7 +229,7 @@ const handleTaskSubmit = async (e) => {
   };
     
     try {
-      const url = editingTask ? `https://taskflow-k90l.onrender.com/tasks/${editingTask.id}` : 'https://taskflow-k90l.onrender.com/tasks';
+      const url = editingTask ? `https://taskflow-9hgr.onrender.com/tasks/${editingTask.id}` : 'https://taskflow-9hgr.onrender.com/tasks';
       const method = editingTask ? 'PUT' : 'POST';
 
       const response = await authFetch(url, {
@@ -286,7 +286,7 @@ const handleTaskSubmit = async (e) => {
     const userId = decoded.userID;
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/tasks/${taskId}?userId=${userId}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/tasks/${taskId}?userId=${userId}`, {
         method: 'DELETE',
       });
       
@@ -324,7 +324,7 @@ const handleTaskSubmit = async (e) => {
     }
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/projects/${projectId}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/projects/${projectId}`, {
         method: 'DELETE',
       });
       

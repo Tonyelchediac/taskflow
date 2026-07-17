@@ -27,7 +27,7 @@ function AdminAlerts() {
     const userId = decoded.userID;
 
     // Get user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -40,7 +40,7 @@ function AdminAlerts() {
 
   const fetchAllAlerts = async () => {
     try {
-      const response = await authFetch('https://taskflow-k90l.onrender.com/alerts');
+      const response = await authFetch('https://taskflow-9hgr.onrender.com/alerts');
       if (response.ok) {
         const data = await response.json();
         setAlerts(data);
@@ -86,7 +86,7 @@ function AdminAlerts() {
     }
     
     try {
-      const response = await authFetch('https://taskflow-k90l.onrender.com/alerts', {
+      const response = await authFetch('https://taskflow-9hgr.onrender.com/alerts', {
         method: 'POST',
         body: JSON.stringify(alertData),
       });
@@ -140,7 +140,7 @@ function AdminAlerts() {
     }
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/alerts/${editingAlert.id}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/alerts/${editingAlert.id}`, {
         method: 'PUT',
         body: JSON.stringify(alertData),
       });
@@ -176,7 +176,7 @@ function AdminAlerts() {
     }
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/alerts/${alertId}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/alerts/${alertId}`, {
         method: 'DELETE',
       });
       

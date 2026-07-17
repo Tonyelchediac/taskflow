@@ -18,7 +18,7 @@ function UserAlert() {
     const userId = decoded.userID;
 
     // Get user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -31,7 +31,7 @@ function UserAlert() {
 
   const fetchAlerts = async (userId) => {
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/users/${userId}/alerts`);
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}/alerts`);
       if (response.ok) {
         const data = await response.json();
         // Filter out dismissed alerts
@@ -59,7 +59,7 @@ function UserAlert() {
     const userId = decoded.userID;
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/alerts/${alertId}/dismiss`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/alerts/${alertId}/dismiss`, {
         method: 'POST',
         body: JSON.stringify({ userId: parseInt(userId) }),
       });

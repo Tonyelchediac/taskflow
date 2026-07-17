@@ -22,7 +22,7 @@ function ProjectsPage() {
     const userId = decoded.userID;
 
     // Get user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -30,7 +30,7 @@ function ProjectsPage() {
       .catch(err => console.log(err));
 
     // Fetch all projects
-    authFetch('https://taskflow-k90l.onrender.com/projects')
+    authFetch('https://taskflow-9hgr.onrender.com/projects')
       .then(res => res.json())
       .then(data => {
         setProjects(data);
@@ -48,7 +48,7 @@ function ProjectsPage() {
   }, [navigate]);
 
   const fetchProjectDetails = (projectId) => {
-    authFetch(`https://taskflow-k90l.onrender.com/projects/${projectId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/projects/${projectId}`)
       .then(res => res.json())
       .then(data => {
         setSelectedProjectData(data);

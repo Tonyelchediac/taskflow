@@ -33,7 +33,7 @@ export default function AdminPage() {
     const userId = decoded.userID;
 
     // Get user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -47,23 +47,23 @@ export default function AdminPage() {
   const fetchDashboardData = async () => {
     try {
       // Fetch users (from admin endpoint which includes all details)
-      const usersRes = await authFetch('https://taskflow-k90l.onrender.com/admin/users');
+      const usersRes = await authFetch('https://taskflow-9hgr.onrender.com/admin/users');
       const users = await usersRes.json();
 
       // Fetch users details
-      const usersDetailsRes = await authFetch('https://taskflow-k90l.onrender.com/usersdetails');
+      const usersDetailsRes = await authFetch('https://taskflow-9hgr.onrender.com/usersdetails');
       const usersDetails = await usersDetailsRes.json();
 
       // Fetch projects
-      const projectsRes = await authFetch('https://taskflow-k90l.onrender.com/projects');
+      const projectsRes = await authFetch('https://taskflow-9hgr.onrender.com/projects');
       const projects = await projectsRes.json();
 
       // Fetch all tasks
-      const tasksRes = await authFetch('https://taskflow-k90l.onrender.com/tasks');
+      const tasksRes = await authFetch('https://taskflow-9hgr.onrender.com/tasks');
       const tasks = await tasksRes.json();
 
       // Fetch alerts
-      const alertsRes = await authFetch('https://taskflow-k90l.onrender.com/alerts');
+      const alertsRes = await authFetch('https://taskflow-9hgr.onrender.com/alerts');
       const alerts = await alertsRes.json();
 
       // Calculate task stats

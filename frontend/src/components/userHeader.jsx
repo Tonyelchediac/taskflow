@@ -29,7 +29,7 @@ export default function UserHeader({ page, userData }) {
 
     const fetchAlertCount = async () => {
       try {
-        const response = await authFetch(`https://taskflow-k90l.onrender.com/users/${userId}/alerts/count`);
+        const response = await authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}/alerts/count`);
         if (response.ok) {
           const data = await response.json();
           setAlertCount(data.count || 0);

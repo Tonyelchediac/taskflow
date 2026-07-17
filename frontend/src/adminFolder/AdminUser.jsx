@@ -30,7 +30,7 @@ export default function AdminUsers() {
     const userId = decoded.userID;
 
     // Get admin user data
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -43,7 +43,7 @@ export default function AdminUsers() {
 
   const fetchUsers = async () => {
     try {
-      const response = await authFetch('https://taskflow-k90l.onrender.com/admin/users');
+      const response = await authFetch('https://taskflow-9hgr.onrender.com/admin/users');
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
@@ -98,8 +98,8 @@ export default function AdminUsers() {
     
     try {
       const url = editingUser
-        ? `https://taskflow-k90l.onrender.com/admin/users/${editingUser.userID}`
-        : 'https://taskflow-k90l.onrender.com/admin/users';
+        ? `https://taskflow-9hgr.onrender.com/admin/users/${editingUser.userID}`
+        : 'https://taskflow-9hgr.onrender.com/admin/users';
       const method = editingUser ? 'PUT' : 'POST';
 
       const response = await authFetch(url, {
@@ -157,7 +157,7 @@ export default function AdminUsers() {
     }
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/admin/users/${userId}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/admin/users/${userId}`, {
         method: 'DELETE',
       });
       

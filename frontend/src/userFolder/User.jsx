@@ -32,7 +32,7 @@ function UserPage() {
     console.log("User ID from token:", userId);
 
     // Fetch user details from database
-    authFetch(`https://taskflow-k90l.onrender.com/users/${userId}`)
+    authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('User not found');
@@ -62,7 +62,7 @@ function UserPage() {
   // Fetch user tasks from API
   const fetchUserTasks = async (userId) => {
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/users/${userId}/tasks`);
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}/tasks`);
       if (response.ok) {
         const tasks = await response.json();
         console.log("All tasks for user:", tasks);
@@ -82,7 +82,7 @@ function UserPage() {
   // Fetch user projects from API
   const fetchUserProjects = async (userId) => {
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/users/${userId}/projects`);
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/users/${userId}/projects`);
       if (response.ok) {
         const projects = await response.json();
         console.log("Projects for user:", projects);
@@ -100,7 +100,7 @@ function UserPage() {
   // Fetch all projects for dropdown
   const fetchAllProjects = async () => {
     try {
-      const response = await authFetch('https://taskflow-k90l.onrender.com/projects');
+      const response = await authFetch('https://taskflow-9hgr.onrender.com/projects');
       if (response.ok) {
         const projects = await response.json();
         setAllProjects(projects);
@@ -142,7 +142,7 @@ function UserPage() {
     };
 
     try {
-      const response = await authFetch('https://taskflow-k90l.onrender.com/tasks', {
+      const response = await authFetch('https://taskflow-9hgr.onrender.com/tasks', {
         method: 'POST',
         body: JSON.stringify(taskData),
       });
@@ -183,7 +183,7 @@ function UserPage() {
     );
     
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/tasks/${taskId}/status`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/tasks/${taskId}/status`, {
         method: 'PATCH',
         body: JSON.stringify({ status: newStatus }),
       });
@@ -227,7 +227,7 @@ function UserPage() {
     }
 
     try {
-      const response = await authFetch(`https://taskflow-k90l.onrender.com/tasks/${taskId}?userId=${userId}`, {
+      const response = await authFetch(`https://taskflow-9hgr.onrender.com/tasks/${taskId}?userId=${userId}`, {
         method: 'DELETE',
       });
       
