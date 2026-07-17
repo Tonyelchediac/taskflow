@@ -85,7 +85,7 @@ function Login() {
     <div className="flex flex-col md:flex-row">
       {/* left section image */}
       <section
-        className="md:block relative md:w-1/2 h-screen"
+        className="hidden md:block relative md:w-1/2 h-screen"
         style={{
           backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUChz-kmbvo4cI2ERyRcE6dmqXrBDsVUB1t1eYVC735dC204XdvCk9KdPhO38NUzI5jgJvL_L5Rpz4qvb0JAIBw47I_XlHYz-Et-LgzS_oi4mAee6QdZLgNKn86_uMypHtBrdbZ4VO7qx--spYfo7vpHtEwIBbQYyaD7-ABiBm-MyTPGjiQsB4Da_8eB6yywzAh7D_Gi4ui1zfxNwrsffYuFhetaV9i60Dsw5ys3rsna6PzVhlf8E_RxWAU2qxYrnXi7RvPcNatK0')`,
         }}
