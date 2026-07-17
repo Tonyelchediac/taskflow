@@ -40,10 +40,11 @@ function authorizeAdmin(req, res, next) {
 }
 
 const db = mysql.createConnection({
-  host: "sql201.hstn.me",
-  user: "mseet_42431595",
-  password: "L8nqCAwV7kQS",
-  database: "mseet_42431595_taskflow",
+  host: "sql12.freesqldatabase.com",
+  user: "sql12833268",
+  password: "aE9MFuh3FX",
+  database: "sql12833268",
+  port: 3306,
 });
 
 app.get("/", (req, res) => {
@@ -109,7 +110,7 @@ app.post("/login", async (req, res) => {
         const token = jwt.sign(
           { userID: user.userID, status: user.status },
           JWT_SECRET,
-          { expiresIn: JWT_EXPIRES_IN }
+          { expiresIn: JWT_EXPIRES_IN },
         );
         return res.json({ success: true, token });
       } else {
@@ -730,183 +731,200 @@ app.get("/admin/users", authenticateToken, authorizeAdmin, (req, res) => {
 });
 
 // Create a new user with hashed password
-app.post("/admin/users", authenticateToken, authorizeAdmin, async (req, res) => {
-  const { usermail, password, status, username, userImage, userPhone, dob } =
-    req.body;
+app.post(
+  "/admin/users",
+  authenticateToken,
+  authorizeAdmin,
+  async (req, res) => {
+    const { usermail, password, status, username, userImage, userPhone, dob } =
+      req.body;
 
-  if (!usermail || !password || !status || !username) {
-    return res.status(400).json({ error: "Missing required fields" });
-  }
+    if (!usermail || !password || !status || !username) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    const getMaxIdSql = "SELECT MAX(userID) as maxId FROM logindetails";
-    db.query(getMaxIdSql, (err, result) => {
-      if (err) {
-        console.error("Error getting max ID:", err);
-        return res
-          .status(500)
-          .json({ error: "Database error: " + err.message });
-      }
+      const getMaxIdSql = "SELECT MAX(userID) as maxId FROM logindetails";
+      db.query(getMaxIdSql, (err, result) => {
+        if (err) {
+          console.error("Error getting max ID:", err);
+          return res
+            .status(500)
+            .json({ error: "Database error: " + err.message });
+        }
 
-      const newUserId = (result[0].maxId || 1000) + 1;
+        const newUserId = (result[0].maxId || 1000) + 1;
 
-      const loginSql =
-        "INSERT INTO logindetails (userID, usermail, password, status) VALUES (?, ?, ?, ?)";
-      db.query(
-        loginSql,
-        [newUserId, usermail, hashedPassword, status],
-        (err) => {
-          if (err) {
-            console.error("Error creating login details:", err);
-            return res
-              .status(500)
-              .json({ error: "Database error: " + err.message });
-          }
+        const loginSql =
+          "INSERT INTO logindetails (userID, usermail, password, status) VALUES (?, ?, ?, ?)";
+        db.query(
+          loginSql,
+          [newUserId, usermail, hashedPassword, status],
+          (err) => {
+            if (err) {
+              console.error("Error creating login details:", err);
+              return res
+                .status(500)
+                .json({ error: "Database error: " + err.message });
+            }
 
-          const phoneValue =
-            userPhone && userPhone.toString().trim() !== ""
-              ? parseInt(userPhone)
-              : 0;
-          const dobValue = dob && dob.trim() !== "" ? dob : null;
-          const imageValue =
-            userImage && userImage.trim() !== "" ? userImage : "";
+            const phoneValue =
+              userPhone && userPhone.toString().trim() !== ""
+                ? parseInt(userPhone)
+                : 0;
+            const dobValue = dob && dob.trim() !== "" ? dob : null;
+            const imageValue =
+              userImage && userImage.trim() !== "" ? userImage : "";
 
-          const detailsSql =
-            "INSERT INTO usersdetails (id, username, userImage, userPhone, dob) VALUES (?, ?, ?, ?, ?)";
-          db.query(
-            detailsSql,
-            [newUserId, username, imageValue, phoneValue, dobValue],
-            (err) => {
-              if (err) {
-                console.error("Error creating user details:", err);
-                return res
-                  .status(500)
-                  .json({ error: "Database error: " + err.message });
-              }
+            const detailsSql =
+              "INSERT INTO usersdetails (id, username, userImage, userPhone, dob) VALUES (?, ?, ?, ?, ?)";
+            db.query(
+              detailsSql,
+              [newUserId, username, imageValue, phoneValue, dobValue],
+              (err) => {
+                if (err) {
+                  console.error("Error creating user details:", err);
+                  return res
+                    .status(500)
+                    .json({ error: "Database error: " + err.message });
+                }
 
-              const getSql = `
+                const getSql = `
             SELECT l.userID, l.usermail, l.password, l.status, 
                    u.username, u.userImage, u.userPhone, u.dob 
             FROM logindetails l 
             LEFT JOIN usersdetails u ON l.userID = u.id 
             WHERE l.userID = ?
           `;
-              db.query(getSql, [newUserId], (err, data) => {
-                if (err) {
-                  console.error("Error fetching new user:", err);
-                  return res
-                    .status(500)
-                    .json({ error: "Database error: " + err.message });
-                }
-                return res.status(201).json(data[0]);
-              });
-            },
-          );
-        },
-      );
-    });
-  } catch (error) {
-    console.error("Error hashing password:", error);
-    return res.status(500).json({ error: "Error processing password" });
-  }
-});
+                db.query(getSql, [newUserId], (err, data) => {
+                  if (err) {
+                    console.error("Error fetching new user:", err);
+                    return res
+                      .status(500)
+                      .json({ error: "Database error: " + err.message });
+                  }
+                  return res.status(201).json(data[0]);
+                });
+              },
+            );
+          },
+        );
+      });
+    } catch (error) {
+      console.error("Error hashing password:", error);
+      return res.status(500).json({ error: "Error processing password" });
+    }
+  },
+);
 
 // Update a user
-app.put("/admin/users/:id", authenticateToken, authorizeAdmin, async (req, res) => {
-  const userId = req.params.id;
-  const { usermail, password, status, username, userImage, userPhone, dob } =
-    req.body;
+app.put(
+  "/admin/users/:id",
+  authenticateToken,
+  authorizeAdmin,
+  async (req, res) => {
+    const userId = req.params.id;
+    const { usermail, password, status, username, userImage, userPhone, dob } =
+      req.body;
 
-  if (!usermail || !status || !username) {
-    return res.status(400).json({ error: "Missing required fields" });
-  }
-
-  try {
-    let loginSql = "UPDATE logindetails SET usermail = ?, status = ?";
-    const loginParams = [usermail, status];
-
-    if (password && password.trim() !== "") {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      loginSql += ", password = ?";
-      loginParams.push(hashedPassword);
+    if (!usermail || !status || !username) {
+      return res.status(400).json({ error: "Missing required fields" });
     }
-    loginSql += " WHERE userID = ?";
-    loginParams.push(userId);
 
-    db.query(loginSql, loginParams, (err) => {
-      if (err) {
-        console.error("Error updating login details:", err);
-        return res
-          .status(500)
-          .json({ error: "Database error: " + err.message });
+    try {
+      let loginSql = "UPDATE logindetails SET usermail = ?, status = ?";
+      const loginParams = [usermail, status];
+
+      if (password && password.trim() !== "") {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        loginSql += ", password = ?";
+        loginParams.push(hashedPassword);
       }
+      loginSql += " WHERE userID = ?";
+      loginParams.push(userId);
 
-      const detailsSql =
-        "UPDATE usersdetails SET username = ?, userImage = ?, userPhone = ?, dob = ? WHERE id = ?";
-      db.query(
-        detailsSql,
-        [username, userImage || "", userPhone || 0, dob || null, userId],
-        (err) => {
-          if (err) {
-            console.error("Error updating user details:", err);
-            return res
-              .status(500)
-              .json({ error: "Database error: " + err.message });
-          }
+      db.query(loginSql, loginParams, (err) => {
+        if (err) {
+          console.error("Error updating login details:", err);
+          return res
+            .status(500)
+            .json({ error: "Database error: " + err.message });
+        }
 
-          const getSql = `
+        const detailsSql =
+          "UPDATE usersdetails SET username = ?, userImage = ?, userPhone = ?, dob = ? WHERE id = ?";
+        db.query(
+          detailsSql,
+          [username, userImage || "", userPhone || 0, dob || null, userId],
+          (err) => {
+            if (err) {
+              console.error("Error updating user details:", err);
+              return res
+                .status(500)
+                .json({ error: "Database error: " + err.message });
+            }
+
+            const getSql = `
           SELECT l.userID, l.usermail, l.password, l.status, 
                  u.username, u.userImage, u.userPhone, u.dob 
           FROM logindetails l 
           LEFT JOIN usersdetails u ON l.userID = u.id 
           WHERE l.userID = ?
         `;
-          db.query(getSql, [userId], (err, data) => {
-            if (err) {
-              console.error("Error fetching updated user:", err);
-              return res
-                .status(500)
-                .json({ error: "Database error: " + err.message });
-            }
-            return res.json(data[0]);
-          });
-        },
-      );
-    });
-  } catch (error) {
-    console.error("Error hashing password:", error);
-    return res.status(500).json({ error: "Error processing password" });
-  }
-});
+            db.query(getSql, [userId], (err, data) => {
+              if (err) {
+                console.error("Error fetching updated user:", err);
+                return res
+                  .status(500)
+                  .json({ error: "Database error: " + err.message });
+              }
+              return res.json(data[0]);
+            });
+          },
+        );
+      });
+    } catch (error) {
+      console.error("Error hashing password:", error);
+      return res.status(500).json({ error: "Error processing password" });
+    }
+  },
+);
 
 // Delete a user
-app.delete("/admin/users/:id", authenticateToken, authorizeAdmin, (req, res) => {
-  const userId = req.params.id;
+app.delete(
+  "/admin/users/:id",
+  authenticateToken,
+  authorizeAdmin,
+  (req, res) => {
+    const userId = req.params.id;
 
-  const detailsSql = "DELETE FROM usersdetails WHERE id = ?";
-  db.query(detailsSql, [userId], (err) => {
-    if (err) {
-      console.error("Error deleting user details:", err);
-      return res.status(500).json({ error: "Database error: " + err.message });
-    }
-
-    const loginSql = "DELETE FROM logindetails WHERE userID = ?";
-    db.query(loginSql, [userId], (err, result) => {
+    const detailsSql = "DELETE FROM usersdetails WHERE id = ?";
+    db.query(detailsSql, [userId], (err) => {
       if (err) {
-        console.error("Error deleting login details:", err);
+        console.error("Error deleting user details:", err);
         return res
           .status(500)
           .json({ error: "Database error: " + err.message });
       }
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      return res.json({ message: "User deleted successfully" });
+
+      const loginSql = "DELETE FROM logindetails WHERE userID = ?";
+      db.query(loginSql, [userId], (err, result) => {
+        if (err) {
+          console.error("Error deleting login details:", err);
+          return res
+            .status(500)
+            .json({ error: "Database error: " + err.message });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({ error: "User not found" });
+        }
+        return res.json({ message: "User deleted successfully" });
+      });
     });
-  });
-});
+  },
+);
 
 app.listen(8081, () => {
   console.log("Server listening on port 8081");
