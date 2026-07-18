@@ -429,7 +429,7 @@ const handleTaskSubmit = async (e) => {
   return (
     <>
       <Header page="./admin/projects" userData={userData} />
-      <main className="flex flex-col md:flex-row mb-20">
+      <main className="flex flex-col md:flex-row">
         {/* aside content */}
         <aside className="w-full md:w-80 lg:w-96 bg-gray-50 border-r border-gray-200 flex flex-col">
           <div className="p-4 space-y-4">
@@ -476,16 +476,16 @@ const handleTaskSubmit = async (e) => {
                       <span className={`px-2 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider ${getProjectTypeColor(project.projectType)}`}>
                         {project.projectType || 'General'}
                       </span>
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center gap-1 transition-opacity">
                         <button
                           onClick={(e) => { e.stopPropagation(); handleEditProject(project); }}
-                          className="p-1 text-gray-400 hover:text-blue-600 rounded"
+                          className="p-1 text-blue-600 rounded"
                         >
                           <span className="material-symbols-outlined text-sm">edit</span>
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); handleDeleteProject(project.id); }}
-                          className="p-1 text-gray-400 hover:text-red-600 rounded"
+                          className="p-1 text-red-600 rounded"
                         >
                           <span className="material-symbols-outlined text-sm">delete</span>
                         </button>
@@ -583,7 +583,7 @@ const handleTaskSubmit = async (e) => {
           )}
 
           {/* Task columns - keep the same */}
-          <div className="flex-1 p-4 md:p-6 flex gap-4 flex-col lg:flex-row overflow-x-auto">
+          <div className="flex-1 p-4 pb-20 md:p-6 flex gap-4 flex-col lg:flex-row overflow-x-auto">
             {/* To-Do Column - status: todo */}
             <div className="min-w-70 flex-1 flex flex-col gap-3">
               <div className="flex items-center justify-between px-2">
@@ -610,16 +610,16 @@ const handleTaskSubmit = async (e) => {
                         <span className="px-2 bg-gray-100 text-gray-600 flex justify-center items-center text-[10px] font-bold rounded uppercase">
                           {task.type || 'General'}
                         </span>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1 transition-opacity">
                           <button
                             onClick={() => handleEditTask(task)}
-                            className="p-1 text-gray-400 hover:text-blue-600 rounded"
+                            className="p-1 text-blue-600 rounded"
                           >
                             <span className="material-symbols-outlined text-sm">edit</span>
                           </button>
                           <button
                             onClick={() => handleDeleteTask(task.id)}
-                            className="p-1 text-gray-400 hover:text-red-600 rounded"
+                            className="p-1 text-red-600 rounded"
                           >
                             <span className="material-symbols-outlined text-sm">delete</span>
                           </button>
@@ -691,16 +691,16 @@ const handleTaskSubmit = async (e) => {
                         <span className="px-2 bg-gray-100 text-gray-600 flex justify-center items-center text-[10px] font-bold rounded uppercase">
                           {task.type || 'General'}
                         </span>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1 transition-opacity">
                           <button
                             onClick={() => handleEditTask(task)}
-                            className="p-1 text-gray-400 hover:text-blue-600 rounded"
+                            className="p-1 text-blue-600 rounded"
                           >
                             <span className="material-symbols-outlined text-sm">edit</span>
                           </button>
                           <button
                             onClick={() => handleDeleteTask(task.id)}
-                            className="p-1 text-gray-400 hover:text-red-600 rounded"
+                            className="p-1 text-red-600 rounded"
                           >
                             <span className="material-symbols-outlined text-sm">delete</span>
                           </button>
@@ -768,7 +768,7 @@ const handleTaskSubmit = async (e) => {
                         <span className="px-2 bg-gray-100 text-gray-600 flex justify-center items-center text-[10px] font-bold rounded uppercase">
                           {task.type || 'General'}
                         </span>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1 transition-opacity">
                           <button
                             onClick={() => handleEditTask(task)}
                             className="p-1 text-gray-400 hover:text-blue-600 rounded"

@@ -234,7 +234,7 @@ function AdminAlerts() {
   return (
     <>
       <Header page="./admin/alerts" userData={userData} />
-      <main className="p-5 mb-20">
+      <main className="p-5 pb-20">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-lg">
           <div>
             <h2 className="text-3xl font-bold text-gray-900">

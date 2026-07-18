@@ -276,7 +276,7 @@ export default function AdminUsers() {
                             <img
                               src={user.userImage}
                               alt={user.username}
-                              className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                              className="w-10 h-10 object-cover border border-gray-200"
                               onError={(e) => {
                                 e.target.onerror = null;
                                 e.target.src = `https://ui-avatars.com/api/?name=${user.username}&background=6366f1&color=fff&size=40`;
