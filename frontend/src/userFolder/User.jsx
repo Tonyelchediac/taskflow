@@ -286,7 +286,7 @@ function UserPage() {
   return (
     <>
       <Header page="./user" userData={userData} />
-      <main className="p-5 md:px-margin-desktop py-xl mb-20">
+      <main className="p-5 md:px-margin-desktop py-8 pb-20">
         <section className="relative w-full h-80 rounded-xl overflow-hidden mb-xl card-shadow group">
           <div
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"

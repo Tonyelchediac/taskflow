@@ -160,7 +160,7 @@ export default function AdminPage() {
   return (
     <>
       <Header page="./admin" userData={userData} />
-      <main className="max-w-7xl mx-auto px-4 md:px-6 py-20">
+      <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 pb-20">
         <div className="mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Administrative Overview</h2>
           <p className="text-gray-600">Real-time performance metrics and organizational control center.</p>

@@ -111,7 +111,7 @@ function UserAlert() {
   return (
     <>
       <Header page="./user/alerts" userData={userData} />
-      <main className="p-5 mb-20">
+      <main className="p-5 pb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-xl gap-lg">
           <div>
             <h2 className="font-display-lg text-display-lg text-on-surface">

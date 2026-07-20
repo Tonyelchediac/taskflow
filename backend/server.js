@@ -45,6 +45,7 @@ const db = mysql.createConnection({
   password: "aE9MFuh3FX",
   database: "sql12833268",
   port: 3306,
+  charset: "utf8mb4",
 });
 
 app.get("/", (req, res) => {

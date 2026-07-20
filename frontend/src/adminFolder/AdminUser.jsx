@@ -211,7 +211,7 @@ export default function AdminUsers() {
   return (
     <>
       <Header page="./admin/users" userData={userData} />
-      <main className=" mx-auto px-4 md:px-6 py-8 mb-20">
+      <main className=" mx-auto px-4 md:px-6 py-8 pb-20">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">User Management</h2>
