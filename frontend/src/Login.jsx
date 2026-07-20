@@ -137,9 +137,6 @@ function Login() {
             <div className="mt-5">
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">Password</p>
-                <a href="" className="text-sm text-blue-600 font-semibold">
-                  Forgot Password?
-                </a>
               </div>
 
               <div className="relative mt-2">
