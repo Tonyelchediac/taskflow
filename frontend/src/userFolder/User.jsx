@@ -478,71 +478,78 @@ function UserPage() {
                   <p className="mt-4 text-on-surface-variant">No pending tasks! Great job!</p>
                 </div>
               ) : (
-                pendingTasks.map((task) => (
-                  <div 
-                    key={task.id}
-                    className="task-card-border bg-surface flex items-center justify-between p-md rounded-lg card-shadow group hover:bg-surface-container transition-colors border-l-primary border-l-4"
-                  >
-                    <div className="flex items-center gap-lg flex-1">
-                      <button 
-                        onClick={() => toggleTaskStatus(task.id)}
-                        className="w-8 h-8 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors"
-                      >
-                        <span
-                          className="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 text-primary"
-                          data-icon="check"
+                pendingTasks.map((task) => {
+                  // Find the project name from userProjects or allProjects
+                  const project = userProjects.find(p => p.id === task.projectID) || 
+                                  allProjects.find(p => p.id === task.projectID);
+                  const projectName = project ? project.projectTitle : `Project #${task.projectID}`;
+                  
+                  return (
+                    <div 
+                      key={task.id}
+                      className="task-card-border bg-surface flex items-center justify-between p-md rounded-lg card-shadow group hover:bg-surface-container transition-colors border-l-primary border-l-4"
+                    >
+                      <div className="flex items-center gap-lg flex-1">
+                        <button 
+                          onClick={() => toggleTaskStatus(task.id)}
+                          className="w-8 h-8 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors"
                         >
-                          check
-                        </span>
-                      </button>
-                      <div className="flex-1">
-                        <h4 className="font-headline-sm text-headline-sm text-on-surface">
-                          {task.title}
-                        </h4>
-                        <div className="flex items-center gap-4 mt-1 flex-wrap">
-                          <span className={`${getTaskTypeColor(task.type)} text-label-md font-label-md px-2 py-0.5 rounded-full`}>
-                            {task.type ? task.type.charAt(0).toUpperCase() + task.type.slice(1) : 'General'}
+                          <span
+                            className="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 text-primary"
+                            data-icon="check"
+                          >
+                            check
                           </span>
-                          {task.time && (
-                            <span className="flex items-center gap-1 text-on-surface-variant text-label-md">
-                              <span
-                                className="material-symbols-outlined text-sm"
-                                data-icon="event"
-                              >
-                                event
-                              </span>
-                              {task.time}
+                        </button>
+                        <div className="flex-1">
+                          <h4 className="font-headline-sm text-headline-sm text-on-surface">
+                            {task.title}
+                          </h4>
+                          <div className="flex items-center gap-4 mt-1 flex-wrap">
+                            <span className={`${getTaskTypeColor(task.type)} text-label-md font-label-md px-2 py-0.5 rounded-full`}>
+                              {task.type ? task.type.charAt(0).toUpperCase() + task.type.slice(1) : 'General'}
                             </span>
-                          )}
-                          {task.projectID && (
-                            <span className="flex items-center gap-1 text-on-surface-variant text-label-md">
-                              <span
-                                className="material-symbols-outlined text-sm"
-                                data-icon="folder"
-                              >
-                                folder
+                            {task.time && (
+                              <span className="flex items-center gap-1 text-on-surface-variant text-label-md">
+                                <span
+                                  className="material-symbols-outlined text-sm"
+                                  data-icon="event"
+                                >
+                                  event
+                                </span>
+                                {task.time}
                               </span>
-                              Project #{task.projectID}
+                            )}
+                            {task.projectID && (
+                              <span className="flex items-center gap-1 text-on-surface-variant text-label-md">
+                                <span
+                                  className="material-symbols-outlined text-sm"
+                                  data-icon="folder"
+                                >
+                                  folder
+                                </span>
+                                {projectName}
+                              </span>
+                            )}
+                            <span className="bg-yellow-100 text-yellow-700 text-label-md font-label-md px-2 py-0.5 rounded-full">
+                              Pending
                             </span>
-                          )}
-                          <span className="bg-yellow-100 text-yellow-700 text-label-md font-label-md px-2 py-0.5 rounded-full">
-                            Pending
-                          </span>
+                          </div>
                         </div>
                       </div>
+                      {/* Delete button - visible on hover */}
+                      <button
+                        onClick={() => deleteTask(task.id)}
+                        className="ml-4 w-10 h-10 flex justify-center items-center text-on-surface-variant hover:text-red-600 hover:bg-red-50 rounded-full transition-colors opacity-0 group-hover:opacity-100"
+                        aria-label="Delete task"
+                      >
+                        <span className="material-symbols-outlined text-sm">
+                          delete
+                        </span>
+                      </button>
                     </div>
-                    {/* Delete button - visible on hover */}
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="ml-4 w-10 h-10 flex justify-center items-center text-on-surface-variant hover:text-red-600 hover:bg-red-50 rounded-full transition-colors opacity-0 group-hover:opacity-100"
-                      aria-label="Delete task"
-                    >
-                      <span className="material-symbols-outlined text-sm">
-                        delete
-                      </span>
-                    </button>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           </div>
